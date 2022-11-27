@@ -11,6 +11,7 @@ class TicketControl extends React.Component {
       formShowing: false,
       mainTicketList: [],
       selected: null,
+      editing: false,
     };
   }
 

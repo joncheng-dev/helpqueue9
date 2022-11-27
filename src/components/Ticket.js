@@ -3,7 +3,7 @@ import React from "react";
 function Ticket(props) {
   return (
     <React.Fragment>
-      <div onClick={props.whenTicketClicked}>
+      <div onClick={() => props.whenTicketClicked(props.id)}>
         <h3>{props.names}</h3>
         <p>{props.location}</p>
         <p>
