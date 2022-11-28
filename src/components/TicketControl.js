@@ -43,12 +43,30 @@ class TicketControl extends React.Component {
     });
   };
 
+  handleEditTicket = () => {
+    this.setState({
+      editing: true,
+    });
+  };
+
+  handleEditSelectedTicket = (editedTicket) => {
+    const newMainTicketList = this.state.mainTicketList.filter((ticket) => this.state.selected.id !== ticket.id).concat(editedTicket);
+    this.setState({
+      mainTicketList: newMainTicketList,
+      selected: null,
+      editing: false,
+    });
+  };
+
   render() {
     let currentlyDisplayed = null;
     let buttonText = null;
 
-    if (this.state.selected !== null) {
-      currentlyDisplayed = <TicketDetail ticket={this.state.selected} />;
+    if (this.state.editing) {
+      currentlyDisplayed = <EditTicketForm ticket={this.state.selected} onSubmitEdits={this.handleEditSelectedTicket} />;
+      buttonText = "Return to Ticket List";
+    } else if (this.state.selected !== null) {
+      currentlyDisplayed = <TicketDetail ticket={this.state.selected} onEditClick={this.handleEditTicket} />;
       buttonText = "Return to Ticket List";
     } else if (this.state.formShowing) {
       currentlyDisplayed = <NewTicketForm onSubmitClick={this.handleAddNewTicket} />;
