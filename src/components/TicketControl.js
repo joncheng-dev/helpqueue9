@@ -59,6 +59,15 @@ class TicketControl extends React.Component {
     });
   };
 
+  handleDeleteSelectedTicket = () => {
+    const newMainTicketList = this.state.mainTicketList.filter((ticket) => this.state.selected.id !== ticket.id);
+    this.setState({
+      mainTicketList: newMainTicketList,
+      selected: null,
+      editing: false,
+    });
+  };
+
   render() {
     let currentlyDisplayed = null;
     let buttonText = null;
@@ -67,7 +76,9 @@ class TicketControl extends React.Component {
       currentlyDisplayed = <EditTicketForm ticket={this.state.selected} onSubmitEdits={this.handleEditSelectedTicket} />;
       buttonText = "Return to Ticket List";
     } else if (this.state.selected !== null) {
-      currentlyDisplayed = <TicketDetail ticket={this.state.selected} onEditClick={this.handleEditTicket} />;
+      currentlyDisplayed = (
+        <TicketDetail ticket={this.state.selected} onEditClick={this.handleEditTicket} onDeleteClick={this.handleDeleteSelectedTicket} />
+      );
       buttonText = "Return to Ticket List";
     } else if (this.state.formShowing) {
       currentlyDisplayed = <NewTicketForm onSubmitClick={this.handleAddNewTicket} />;
