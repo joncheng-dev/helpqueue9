@@ -16,6 +16,8 @@ function EditTicketForm(props) {
   }
   return (
     <React.Fragment>
+      <h2>Edit Ticket</h2>
+      <hr />
       <ReusableForm onSubmittingForm={submitEditedTicket} buttonText="Update Ticket" />
     </React.Fragment>
   );

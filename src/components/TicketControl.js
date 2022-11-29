@@ -20,6 +20,7 @@ class TicketControl extends React.Component {
       this.setState({
         formShowing: false,
         selected: null,
+        editing: false,
       });
     } else {
       this.setState((prevState) => ({
